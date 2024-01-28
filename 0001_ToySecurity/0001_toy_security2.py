@@ -1,14 +1,9 @@
 from gpiozero import DistanceSensor
 from gpiozero.pins.pigpio import PiGPIOFactory
+from gpiozero import LightSensor
 from gpiozero import Device, LED
 import time
 from time import sleep
-
-# ----------------------------------------------------------
-# Init
-# ----------------------------------------------------------
-
-ultrasonic = DistanceSensor(echo=23, trigger=24, threshold_distance=0.1)
 
 # ----------------------------------------------------------
 # Reduce Jitter by using PiGPIOFactor
@@ -18,6 +13,16 @@ ultrasonic = DistanceSensor(echo=23, trigger=24, threshold_distance=0.1)
 # ----------------------------------------------------------
 Device.pin_factory = PiGPIOFactory('127.0.0.1')
 
+# ----------------------------------------------------------
+# Init
+# ----------------------------------------------------------
+print("Warming up sensors...")
+
+ultrasonic = DistanceSensor(echo=23, trigger=24, threshold_distance=0.1)
+#ultrasonic = DistanceSensor(echo=23, trigger=24)
+laser_1_sensor = LightSensor(16)
+
+sleep(1)
 
 # ----------------------------------------------------------
 # Setup
@@ -28,14 +33,15 @@ def setup():
 
 
 def destroy():
-    pass
+    laser_1_sensor.close()
+    ultrasonic.close()
 
 # ----------------------------------------------------------
 # Main body
 # ----------------------------------------------------------
 def main():
     while True: 
-        print("distance =",ultrasonic.distance*1000)
+        print("distance =",ultrasonic.distance*1000, " laser=",laser_1_sensor.value)
         sleep(0.2)
         
 
