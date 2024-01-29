@@ -41,7 +41,7 @@ def destroy():
 # ----------------------------------------------------------
 def main():
     while True: 
-        print("distance =",ultrasonic.distance*1000, " laser=",laser_1_sensor.value)
+        print("distance =",ultrasonic.distance*1000, "mm laser=",laser_1_sensor.value)
         sleep(0.2)
         
 
