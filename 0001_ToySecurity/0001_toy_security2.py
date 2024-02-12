@@ -40,13 +40,19 @@ def destroy():
 # Main body
 # ----------------------------------------------------------
 def main():
+    print("main")
     while True: 
-        print("distance =",ultrasonic.distance*1000, "mm laser=",laser_1_sensor.value)
+        print("looping")
+        print("mm laser=",laser_1_sensor.value)
+        print("distance=",ultrasonic.distance*1000)
+        #print("distance =",ultrasonic.distance*1000, "mm laser=",laser_1_sensor.value)
         sleep(0.2)
+    print("done")
         
 
 if __name__ == '__main__':
     try:
+        print("warming up")
         setup()
         main()
     except KeyboardInterrupt:
